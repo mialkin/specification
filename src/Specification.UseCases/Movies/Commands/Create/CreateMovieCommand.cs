@@ -10,5 +10,4 @@ public record CreateMovieCommand(
     DateTime ReleaseDate,
     MpaaRating MpaaRating,
     string Genre,
-    double Rating)
-    : IRequest<Result<CreateMovieDto, Error>>;
+    double Rating) : IRequest<Result<CreateMovieDto, Error>>;

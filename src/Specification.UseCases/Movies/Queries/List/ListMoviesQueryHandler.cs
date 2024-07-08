@@ -12,7 +12,13 @@ internal class ListMoviesQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseC
         CancellationToken cancellationToken)
     {
         var movies = await readOnlyDatabaseContext.Movies
-            .Select(x => new ListMoviesDto(x.Id, x.Name))
+            .Select(x => new ListMoviesDto(
+                x.Id,
+                x.Name,
+                x.ReleaseDate,
+                x.MpaaRating,
+                x.Genre,
+                x.Rating))
             .ToListAsync(cancellationToken);
 
         return movies;

@@ -19,6 +19,10 @@ internal class UpdateMovieCommandHandler(
         }
 
         movie.Name = request.Name;
+        movie.ReleaseDate = request.ReleaseDate;
+        movie.MpaaRating = request.MpaaRating;
+        movie.Genre = request.Genre;
+        movie.Rating = request.Rating;
 
         try
         {

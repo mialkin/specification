@@ -13,7 +13,13 @@ public class SearchMoviesQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseC
     {
         var movies = await readOnlyDatabaseContext.Movies
             .Where(x => x.Name.Contains(request.Term))
-            .Select(x => new SearchMoviesDto(x.Id, x.Name))
+            .Select(x => new SearchMoviesDto(
+                x.Id,
+                x.Name,
+                x.ReleaseDate,
+                x.MpaaRating,
+                x.Genre,
+                x.Rating))
             .ToListAsync(cancellationToken);
 
         return movies;
