@@ -16,7 +16,7 @@ public static class SearchMoviesEndpoint
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                var query = new SearchMoviesQuery(request.Term);
+                var query = new SearchMoviesQuery(request.ForKidsOnly);
                 var movies = await sender.Send(query, cancellationToken);
 
                 return Results.Ok(new SearchMoviesResponse(movies));

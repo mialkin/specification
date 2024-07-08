@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Specification.Domain.Entities;
 using Specification.Infrastructure.Interfaces.Database;
 
 namespace Specification.UseCases.Movies.Queries.Search;
@@ -12,7 +13,7 @@ public class SearchMoviesQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseC
         CancellationToken cancellationToken)
     {
         var movies = await readOnlyDatabaseContext.Movies
-            .Where(x => x.Name.Contains(request.Term))
+            .Where(x => x.MpaaRating <= MpaaRating.Pg || !request.ForKidsOnly)
             .Select(x => new SearchMoviesDto(
                 x.Id,
                 x.Name,
