@@ -1,3 +1,4 @@
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +17,7 @@ public static class SearchMoviesEndpoint
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                var query = new SearchMoviesQuery(request.ForKidsOnly);
+                var query = request.Adapt<SearchMoviesQuery>();
                 var movies = await sender.Send(query, cancellationToken);
 
                 return Results.Ok(new SearchMoviesResponse(movies));

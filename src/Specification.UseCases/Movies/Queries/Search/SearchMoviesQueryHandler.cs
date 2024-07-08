@@ -13,7 +13,9 @@ public class SearchMoviesQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseC
         CancellationToken cancellationToken)
     {
         var movies = await readOnlyDatabaseContext.Movies
-            .Where(x => x.MpaaRating <= MpaaRating.Pg || !request.ForKidsOnly)
+            .Where(x => (x.MpaaRating <= MpaaRating.Pg || !request.ForKidsOnly)
+                        && x.Rating >= request.MinimumRating
+                        && (x.ReleaseDate <= DateTime.Now.AddMonths(-6) || !request.AvailableOnCd))
             .Select(x => new SearchMoviesDto(
                 x.Id,
                 x.Name,

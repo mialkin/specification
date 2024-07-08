@@ -1,3 +1,3 @@
 namespace Specification.Api.Endpoints.Movies.Search;
 
-public record SearchMoviesRequest(bool ForKidsOnly);
+public record SearchMoviesRequest(bool ForKidsOnly, double MinimumRating, bool AvailableOnCd);
