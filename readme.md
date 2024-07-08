@@ -1,5 +1,9 @@
 # Specification
 
+## About
+
+This is a project that showcases [↑ specification pattern](https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation).
+
 ## Prerequisites
 
 - [↑ .NET SDK 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
@@ -13,10 +17,6 @@
 
 ```bash
 make run-infrastructure
-```
-
-```bash
-make migrate-database name="Add_Initial_Migration" environment="Ide"
 ```
 
 ```bash
