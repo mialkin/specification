@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:16.3
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DBNAME: postgres
+    ports:
+      - ${POSTGRES_PORT}:5432
