@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Mapster;
 using MediatR;
 using Specification.Domain;
 using Specification.Domain.Entities;
@@ -15,7 +16,8 @@ internal class CreateMovieCommandHandler(
         CreateMovieCommand request,
         CancellationToken cancellationToken)
     {
-        var movie = new Movie { Id = Guid.NewGuid(), Name = request.Name };
+        var movie = request.Adapt<Movie>();
+        movie.Id = Guid.NewGuid();
 
         databaseContext.Movies.Add(movie);
 
