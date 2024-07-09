@@ -15,9 +15,12 @@ public static class Errors
         }
     }
 
-    public static class Word
+    public static class Movie
     {
         public static Error NameAlreadyExists() =>
             new(code: "movie.name.already.exists", message: "Name already exists");
+
+        public static Error NotSuitableForChildren() =>
+            new(code: "movie.not.suitable.for.children", message: "The movie is not suitable for children");
     }
 }

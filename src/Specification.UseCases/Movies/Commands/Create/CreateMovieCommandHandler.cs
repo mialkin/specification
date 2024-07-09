@@ -30,7 +30,7 @@ internal class CreateMovieCommandHandler(
             if (exception.InnerException != null &&
                 exception.InnerException.Message.Contains(databaseErrorMessagesProvider.MovieNameUniquenessViolation))
             {
-                return Errors.Word.NameAlreadyExists();
+                return Errors.Movie.NameAlreadyExists();
             }
 
             throw;
