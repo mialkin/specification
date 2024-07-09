@@ -22,5 +22,8 @@ public static class Errors
 
         public static Error NotSuitableForChildren() =>
             new(code: "movie.not.suitable.for.children", message: "The movie is not suitable for children");
+
+        public static Error DoesNotHaveCdVersion() =>
+            new(code: "movie.does.not.have.cd.version", message: "The movie doesn't have a CD version");
     }
 }

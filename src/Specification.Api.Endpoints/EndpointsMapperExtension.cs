@@ -9,6 +9,7 @@ using Specification.Api.Endpoints.Movies.Search;
 using Specification.Api.Endpoints.Movies.Update;
 using Specification.Api.Endpoints.Tickets.BuyAdult;
 using Specification.Api.Endpoints.Tickets.BuyChild;
+using Specification.Api.Endpoints.Tickets.BuyOnCd;
 
 namespace Specification.Api.Endpoints;
 
@@ -30,7 +31,7 @@ public static class EndpointsMapperExtension
         groupBuilder.MapUpdateMovie("/");
         groupBuilder.MapDeleteMovie("/");
         groupBuilder.MapListMovies("list");
-        groupBuilder.MapSearchMovies("/search");
+        groupBuilder.MapSearchMovies("search");
     }
 
     private static void MapTicketEndpoints(IEndpointRouteBuilder builder)
@@ -38,7 +39,8 @@ public static class EndpointsMapperExtension
         var groupBuilder = builder.MapGroup("api/tickets")
             .WithTags("Tickets");
 
-        groupBuilder.MapBuyAdultTicket("/buyAdult");
-        groupBuilder.MapBuyChildTicket("/buyChild");
+        groupBuilder.MapBuyAdultTicket("buyAdult");
+        groupBuilder.MapBuyChildTicket("buyChild");
+        groupBuilder.MapBuyOnCdTicket("buyOnCd");
     }
 }

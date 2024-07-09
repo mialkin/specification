@@ -12,8 +12,4 @@
     <ProjectReference Include="..\Specification.UseCases\Specification.UseCases.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Tickets\BuyOnCd\" />
-  </ItemGroup>
-
 </Project>
