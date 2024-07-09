@@ -4,6 +4,8 @@
 
 This is a project that showcases [↑ specification pattern](https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation).
 
+The project is based on [↑ Specification Pattern in C#](https://www.pluralsight.com/courses/csharp-specification-pattern) course on Pluralsight.
+
 ## Prerequisites
 
 - [↑ .NET SDK 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
