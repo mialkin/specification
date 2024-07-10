@@ -1,13 +1,12 @@
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Time.Testing;
 using Specification.Domain;
 using Specification.Infrastructure.Interfaces.Database;
 
 namespace Specification.UseCases.Tickets.Commands.BuyOnCd;
 
-internal class BuyOnCdTicketCommandHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
+internal class BuyOnCdTicketCommandHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext, TimeProvider timeProvider)
     : IRequestHandler<BuyOnCdTicketCommand, Result<Maybe<BuyOnCdTicketDto>, Error>>
 {
     public async Task<Result<Maybe<BuyOnCdTicketDto>, Error>> Handle(
@@ -22,10 +21,8 @@ internal class BuyOnCdTicketCommandHandler(IReadOnlyDatabaseContext readOnlyData
             return Maybe<BuyOnCdTicketDto>.None;
         }
 
-        var fakeTimeProvider = new FakeTimeProvider(new DateTimeOffset(new DateTime(2017, 1, 1)));
-
         // A movie is available on CD if it has been released at least 6 months ago.
-        var halfYearAgo = fakeTimeProvider.GetUtcNow().AddMonths(-6).UtcDateTime;
+        var halfYearAgo = timeProvider.GetUtcNow().AddMonths(-6).UtcDateTime;
         if (movie.ReleaseDate >= halfYearAgo)
         {
             return Errors.Movie.DoesNotHaveCdVersion();

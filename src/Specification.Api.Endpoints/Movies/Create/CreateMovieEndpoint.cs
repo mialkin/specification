@@ -27,6 +27,6 @@ public static class CreateMovieEndpoint
             })
             .Produces<CreateMovieResponse>()
             .ProducesProblem(StatusCodes.Status400BadRequest)
-            .WithOpenApi(x => new OpenApiOperation(x) { Summary = "BuyAdult movie" });
+            .WithOpenApi(x => new OpenApiOperation(x) { Summary = "Create movie" });
     }
 }
