@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Specification.Domain.Entities;
 using Specification.Infrastructure.Interfaces.Database;
 
 namespace Specification.UseCases.Movies.Queries.Search;
@@ -16,9 +15,7 @@ public class SearchMoviesQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseC
         var halfYearAgo = timeProvider.GetUtcNow().AddMonths(-6).UtcDateTime;
 
         var movies = await readOnlyDatabaseContext.Movies
-            .Where(x => (x.MpaaRating <= MpaaRating.Pg || !request.ForKidsOnly)
-                        && x.Rating >= request.MinimumRating
-                        && (x.ReleaseDate <= halfYearAgo || !request.AvailableOnCd))
+            .Where(request.Expression)
             .Select(x => new SearchMoviesDto(
                 x.Id,
                 x.Name,
