@@ -10,8 +10,12 @@ internal sealed class OrSpecification<T>(Specification<T> leftSpecification, Spe
         var leftExpression = leftSpecification.ToExpression();
         var rightExpression = rightSpecification.ToExpression();
 
-        var orExpression = Expression.OrElse(leftExpression.Body, rightExpression.Body);
+        var invokedExpression = Expression.Invoke(rightExpression, leftExpression.Parameters);
 
-        return Expression.Lambda<Func<T, bool>>(orExpression, leftExpression.Parameters.Single());
+        var lambdaExpression = Expression.Lambda(
+            body: Expression.OrElse(leftExpression.Body, invokedExpression),
+            parameters: leftExpression.Parameters);
+
+        return (Expression<Func<T, bool>>)lambdaExpression;
     }
 }

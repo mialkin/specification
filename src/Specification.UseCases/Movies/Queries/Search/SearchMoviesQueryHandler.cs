@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Specification.Domain.Entities;
 using Specification.Infrastructure.Interfaces.Database;
 using Specification.UseCases.Movies.Specifications;
 
@@ -12,12 +13,20 @@ public class SearchMoviesQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseC
         SearchMoviesQuery request,
         CancellationToken cancellationToken)
     {
-        var forKidsSpecification = new MovieForKidsSpecification();
-        var onCdSpecification = new AvailableOnCdSpecification();
+        var specification = Specification<Movie>.All;
 
-        // var specification = onCdSpecification.And(forKidsSpecification.Not());
+        if (request.ForKidsOnly)
+        {
+            specification = specification.And(new MovieForKidsSpecification());
+        }
+
+        if (request.AvailableOnCd)
+        {
+            specification = specification.And(new AvailableOnCdSpecification());
+        }
+
         var movies = await readOnlyDatabaseContext.Movies
-            .Where(forKidsSpecification.And(onCdSpecification).ToExpression())
+            .Where(specification.ToExpression())
             .Select(x => new SearchMoviesDto(
                 x.Id,
                 x.Name,

@@ -10,8 +10,12 @@ internal sealed class AndSpecification<T>(Specification<T> leftSpecification, Sp
         var leftExpression = leftSpecification.ToExpression();
         var rightExpression = rightSpecification.ToExpression();
 
-        var andExpression = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
+        var invocationExpression = Expression.Invoke(rightExpression, leftExpression.Parameters);
 
-        return Expression.Lambda<Func<T, bool>>(andExpression, leftExpression.Parameters.Single());
+        var lambdaExpression = Expression.Lambda(
+            body: Expression.AndAlso(leftExpression.Body, invocationExpression),
+            parameters: leftExpression.Parameters);
+
+        return (Expression<Func<T, bool>>)lambdaExpression;
     }
 }
