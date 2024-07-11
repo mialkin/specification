@@ -22,8 +22,8 @@ internal class BuyOnCdTicketCommandHandler(IReadOnlyDatabaseContext readOnlyData
             return Maybe<BuyOnCdTicketDto>.None;
         }
 
-        var hasCdVersion = Movie.HasCdVersion.Compile();
-        if (!hasCdVersion(movie))
+        var specification = new GenericSpecification<Movie>(Movie.HasCdVersion);
+        if (!specification.IsSatisfiedBy(movie))
         {
             return Errors.Movie.DoesNotHaveCdVersion();
         }

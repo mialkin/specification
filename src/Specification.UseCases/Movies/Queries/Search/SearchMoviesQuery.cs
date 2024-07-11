@@ -1,8 +1,6 @@
-using System.Linq.Expressions;
 using MediatR;
-using Specification.Domain.Entities;
 
 namespace Specification.UseCases.Movies.Queries.Search;
 
-public record SearchMoviesQuery(Expression<Func<Movie, bool>> Expression)
+public record SearchMoviesQuery(bool ForKidsOnly, double MinimumRating, bool AvailableOnCd)
     : IRequest<IReadOnlyCollection<SearchMoviesDto>>;

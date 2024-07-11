@@ -22,8 +22,8 @@ internal class BuyChildTicketCommandHandler(IReadOnlyDatabaseContext readOnlyDat
             return Maybe<BuyChildTicketDto>.None;
         }
 
-        var isSuitableForChildren = Movie.IsSuitableForChildren.Compile();
-        if (!isSuitableForChildren(movie))
+        var specification = new GenericSpecification<Movie>(Movie.IsSuitableForChildren);
+        if (!specification.IsSatisfiedBy(movie))
         {
             return Errors.Movie.NotSuitableForChildren();
         }

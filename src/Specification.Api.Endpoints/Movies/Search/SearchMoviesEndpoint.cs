@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.OpenApi.Models;
-using Specification.Domain.Entities;
 using Specification.UseCases.Movies.Queries.Search;
 
 namespace Specification.Api.Endpoints.Movies.Search;
@@ -18,9 +17,7 @@ public static class SearchMoviesEndpoint
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                var expression = request.ForKidsOnly ? Movie.IsSuitableForChildren : x => true;
-
-                var query = new SearchMoviesQuery(expression);
+                var query = request.Adapt<SearchMoviesQuery>();
                 var movies = await sender.Send(query, cancellationToken);
 
                 return Results.Ok(new SearchMoviesResponse(movies));
