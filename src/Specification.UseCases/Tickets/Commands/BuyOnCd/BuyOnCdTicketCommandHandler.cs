@@ -2,12 +2,11 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Specification.Domain;
-using Specification.Domain.Entities;
 using Specification.Infrastructure.Interfaces.Database;
 
 namespace Specification.UseCases.Tickets.Commands.BuyOnCd;
 
-internal class BuyOnCdTicketCommandHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
+internal class BuyOnCdTicketCommandHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext, TimeProvider timeProvider)
     : IRequestHandler<BuyOnCdTicketCommand, Result<Maybe<BuyOnCdTicketDto>, Error>>
 {
     public async Task<Result<Maybe<BuyOnCdTicketDto>, Error>> Handle(
@@ -22,7 +21,7 @@ internal class BuyOnCdTicketCommandHandler(IReadOnlyDatabaseContext readOnlyData
             return Maybe<BuyOnCdTicketDto>.None;
         }
 
-        var specification = new GenericSpecification<Movie>(Movie.HasCdVersion);
+        var specification = new AvailableOnCdSpecification(timeProvider);
         if (!specification.IsSatisfiedBy(movie))
         {
             return Errors.Movie.DoesNotHaveCdVersion();
