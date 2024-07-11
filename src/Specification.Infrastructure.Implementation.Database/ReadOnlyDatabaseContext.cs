@@ -6,5 +6,7 @@ namespace Specification.Infrastructure.Implementation.Database;
 
 internal sealed class ReadOnlyDatabaseContext(IDatabaseContext databaseContext) : IReadOnlyDatabaseContext
 {
+    public IQueryable<Director> Directors => databaseContext.Directors.AsNoTracking();
+
     public IQueryable<Movie> Movies => databaseContext.Movies.AsNoTracking();
 }

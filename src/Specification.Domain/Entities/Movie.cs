@@ -13,4 +13,8 @@ public class Movie
     public required string Genre { get; set; }
 
     public required double Rating { get; set; }
+
+    public Guid DirectorId { get; set; }
+
+    public Director? Director { get; set; }
 }
