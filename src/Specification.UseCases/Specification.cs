@@ -43,4 +43,10 @@ public abstract class Specification<T>
     {
         return new NotSpecification<T>(this);
     }
+
+    public static Specification<T> operator &(Specification<T> left, Specification<T> right) => left.And(right);
+
+    public static Specification<T> operator |(Specification<T> left, Specification<T> right) => left.Or(right);
+
+    public static Specification<T> operator !(Specification<T> specification) => specification.Not();
 }

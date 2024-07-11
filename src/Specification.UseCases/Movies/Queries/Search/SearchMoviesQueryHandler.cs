@@ -17,12 +17,12 @@ public class SearchMoviesQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseC
 
         if (request.ForKidsOnly)
         {
-            specification = specification.And(new MovieForKidsSpecification());
+            specification &= new MovieForKidsSpecification();
         }
 
         if (request.AvailableOnCd)
         {
-            specification = specification.And(new AvailableOnCdSpecification());
+            specification &= new AvailableOnCdSpecification();
         }
 
         var movies = await readOnlyDatabaseContext.Movies
