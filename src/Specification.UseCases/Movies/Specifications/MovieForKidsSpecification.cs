@@ -1,12 +1,12 @@
 using System.Linq.Expressions;
 using Specification.Domain.Entities;
 
-namespace Specification.Domain;
+namespace Specification.UseCases.Movies.Specifications;
 
 public sealed class MovieForKidsSpecification : Specification<Movie>
 {
     public override Expression<Func<Movie, bool>> ToExpression()
     {
-        return movie => movie.MpaaRating <= MpaaRating.Pg;
+        return x => x.MpaaRating <= MpaaRating.Pg;
     }
 }

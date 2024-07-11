@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Specification.Domain;
+namespace Specification.UseCases;
 
 public abstract class Specification<T>
 {

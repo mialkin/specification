@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Specification.Domain.Entities;
 
-namespace Specification.Domain;
+namespace Specification.UseCases.Movies.Specifications;
 
 public sealed class AvailableOnCdSpecification(TimeProvider timeProvider) : Specification<Movie>
 {
@@ -9,6 +9,6 @@ public sealed class AvailableOnCdSpecification(TimeProvider timeProvider) : Spec
 
     public override Expression<Func<Movie, bool>> ToExpression()
     {
-        return movie => movie.ReleaseDate <= timeProvider.GetUtcNow().AddMonths(-MonthsBeforeDvdIsOut);
+        return x => x.ReleaseDate <= timeProvider.GetUtcNow().AddMonths(-MonthsBeforeDvdIsOut);
     }
 }

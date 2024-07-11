@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Specification.Domain;
 using Specification.Infrastructure.Interfaces.Database;
+using Specification.UseCases.Movies.Specifications;
 
 namespace Specification.UseCases.Tickets.Commands.BuyOnCd;
 

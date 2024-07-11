@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Specification.Domain;
 using Specification.Domain.Entities;
 using Specification.Infrastructure.Interfaces.Database;
+using Specification.UseCases.Movies.Specifications;
 
 namespace Specification.UseCases.Tickets.Commands.BuyChild;
 
