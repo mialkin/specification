@@ -12,10 +12,12 @@ public class SearchMoviesQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseC
         SearchMoviesQuery request,
         CancellationToken cancellationToken)
     {
-        var specification = new MovieForKidsSpecification();
+        var forKidsSpecification = new MovieForKidsSpecification();
+        var onCdSpecification = new AvailableOnCdSpecification();
 
+        // var specification = onCdSpecification.And(forKidsSpecification.Not());
         var movies = await readOnlyDatabaseContext.Movies
-            .Where(specification.ToExpression())
+            .Where(forKidsSpecification.And(onCdSpecification).ToExpression())
             .Select(x => new SearchMoviesDto(
                 x.Id,
                 x.Name,
