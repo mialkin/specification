@@ -14,7 +14,7 @@ public abstract class Specification<T>
 
     public abstract Expression<Func<T, bool>> ToExpression();
 
-    public Specification<T> And(Specification<T> specification)
+    private Specification<T> And(Specification<T> specification)
     {
         if (this == All)
         {
@@ -29,7 +29,7 @@ public abstract class Specification<T>
         return new AndSpecification<T>(this, specification);
     }
 
-    public Specification<T> Or(Specification<T> specification)
+    private Specification<T> Or(Specification<T> specification)
     {
         if (this == All || specification == All)
         {
@@ -39,10 +39,7 @@ public abstract class Specification<T>
         return new OrSpecification<T>(this, specification);
     }
 
-    public Specification<T> Not()
-    {
-        return new NotSpecification<T>(this);
-    }
+    private Specification<T> Not() => new NotSpecification<T>(this);
 
     public static Specification<T> operator &(Specification<T> left, Specification<T> right) => left.And(right);
 

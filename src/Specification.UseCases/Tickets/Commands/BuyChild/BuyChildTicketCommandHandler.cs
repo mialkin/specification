@@ -2,7 +2,6 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Specification.Domain;
-using Specification.Domain.Entities;
 using Specification.Infrastructure.Interfaces.Database;
 using Specification.UseCases.Movies.Specifications;
 
