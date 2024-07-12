@@ -4,7 +4,7 @@
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:API-PORT",
+      "applicationUrl": "http://localhost:8040",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Ide"
       }
